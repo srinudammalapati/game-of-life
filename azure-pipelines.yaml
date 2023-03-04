@@ -1,22 +1,26 @@
 ---
   pool: devpool
 
-  trigger: 
-    - main
-  variables:  
-    JAVA_HOME_8_X64: '/usr/lib/jvm/java-8-openjdk-amd64'    
 
+  trigger:
+    - master
+  variables:
+    JAVA_HOME_11_X64: '/usr/lib/jvm/java-8-openjdk-amd64'  
+  
+  resources:
+    repositories:
+      - repository: azuredevopsparameters
+        endpoint: github.com_srinudammalapati
+        ref: 'refs/heads/master'
+        name: srinudammalapati/azuredevops
+        type: github  
   stages:
-    - stage: buildstage
-      displayName: mavenbuild
-      jobs:
-        - job: maven
-          displayName: mavenjob
-          steps: 
-            - task: Maven@3
-              inputs:
-                mavenPOMFile: 'pom.xml'
-                goals: 'package' 
-                publishJUnitResults: true 
-                testResultsFiles: '**/surefire-reports/TEST-*.xml'
-                jdkVersionOption: '1.8'
+    - template: azuredevops/azuredevopstemplate.yaml@azuredevopsparameters
+      parameters:
+        goal: package
+        javaversion: "1.8"
+        javadirectory: /usr/lib/jvm/java-8-openjdk-amd64/
+  
+  
+  
+  
