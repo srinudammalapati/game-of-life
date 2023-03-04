@@ -18,7 +18,7 @@
     - template: azuredevopstemplate.yaml@azuredevopsparameters
       parameters:
         goal: package
-        javaversion: "1.8"
+        jdkVersionoption: "1.8"
         javadirectory: /usr/lib/jvm/java-8-openjdk-amd64/
   
   
