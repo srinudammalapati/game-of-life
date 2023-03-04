@@ -5,17 +5,17 @@
   trigger:
     - master
   variables:
-    JAVA_HOME_11_X64: '/usr/lib/jvm/java-8-openjdk-amd64'  
+    JAVA_HOME_8_X64: '/usr/lib/jvm/java-8-openjdk-amd64'  
   
   resources:
     repositories:
       - repository: azuredevopsparameters
-        endpoint: github.com_srinudammalapati
+        endpoint: github_id
         ref: 'refs/heads/master'
         name: srinudammalapati/azuredevops
         type: github  
   stages:
-    - template: azuredevops/azuredevopstemplate.yaml@azuredevopsparameters
+    - template: azuredevopstemplate.yaml@azuredevopsparameters
       parameters:
         goal: package
         javaversion: "1.8"
